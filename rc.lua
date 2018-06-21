@@ -314,12 +314,12 @@ globalkeys = my_table.join(
 
     -- {{{ Personal keybindings
     -- dmenu
-    awful.key({ modkey, "Shift"   }, "d",
-    function ()
-        awful.spawn(string.format("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn NotoMonoRegular:bold:pixelsize=11",
-        beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-	end,
-    {description = "show dmenu", group = "hotkeys"}),
+    --awful.key({ modkey, "Shift"   }, "d",
+    --function ()
+    --    awful.spawn(string.format("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn NotoMonoRegular:bold:pixelsize=11",
+    --    beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
+	  --end,
+    --{description = "show dmenu", group = "hotkeys"}),
 
 
     -- super + ... function keys
@@ -343,40 +343,39 @@ globalkeys = my_table.join(
         {description = mailclient , group = "function keys" }),
     awful.key({ modkey }, "F10", function () awful.util.spawn( mediaplayer ) end,
         {description = mediaplayer , group = "function keys" }),
-    awful.key({ modkey }, "F11", function () awful.util.spawn( "rofi -show run -fullscreen" ) end,
-        {description = "rofi fullscreen" , group = "function keys" }),
-    awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -show run" ) end,
-        {description = "rofi" , group = "function keys" }),
+    --awful.key({ modkey }, "F11", function () awful.util.spawn( "rofi -show run -fullscreen" ) end,
+       -- {description = "rofi fullscreen" , group = "function keys" }),
+    --awful.key({ modkey }, "F12", function () awful.util.spawn( "rofi -show run" ) end,
+       -- {description = "rofi" , group = "function keys" }),
 
     -- super + ...
     awful.key({ modkey }, "e", function () awful.util.spawn( editorgui ) end,
         {description = "run gui editor", group = "super"}),
-    awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
-        {description = "htop", group = "super"}),
-    awful.key({ modkey }, "m", function () awful.util.spawn( mediaplayer ) end,
-        {description = "mediaplayer", group = "super"}),
+    --awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
+    --    {description = "htop", group = "super"}),
+    --awful.key({ modkey }, "m", function () awful.util.spawn( mediaplayer ) end,
+    --    {description = "mediaplayer", group = "super"}),
     --awful.key({ modkey }, "q", function () awful.spawn( browser) end,
     --    {description = "run browser", group = "super"}),
-    awful.key({ modkey }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
-        {description = "rofi theme selector", group = "super"}),
-    awful.key({ modkey }, "t", function () awful.util.spawn( terminal ) end,
-        {description = "terminal", group = "super"}),
+    awful.key({ modkey }, "r", function () awful.util.spawn( "rofi -show run" ) end,
+        {description = "rofi", group = "function keys" }),
+    --awful.key({ modkey }, "t", function () awful.util.spawn( terminal ) end,
+    --    {description = "terminal", group = "super"}),
     --awful.key({ modkey }, "y", function () awful.util.spawn( "pavucontrol" ) end,
         --{description = "pulseaudio control", group = "super"}),
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-        {description = "run prompt", group = "super"}),
-
-   awful.key({ modkey }, "y", function () awful.util.spawn_with_shell( "GTK_THEME=ARC libreoffice" ) end,
-   {description = "run libreoffice", group = "super"}),
-
-  awful.key({ modkey }, "q",  function () awful.util.spawn( "oblogout" ) end,
-      {description = "exit", group = "hotkeys"}),
+    --awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+        --{description = "run prompt", group = "super"}),
+    awful.key({ modkey }, "y", function () awful.util.spawn_with_shell( "GTK_THEME=ARC libreoffice" ) end,
+        {description = "run libreoffice", group = "super"}),
+    awful.key({ modkey }, "q",  function () awful.util.spawn( "oblogout" ) end,
+        {description = "exit", group = "hotkeys"}),
     awful.key({ modkey }, "Escape", function () awful.util.spawn( "xkill" ) end,
         {description = "Kill proces", group = "hotkeys"}),
 
     -- super + shift + ...
     awful.key({ modkey, "Shift"   }, "Return", function() awful.util.spawn( filemanager ) end),
-
+    awful.key({ modkey, "Shift" }, "r", function () awful.util.spawn( "rofi-theme-selector" ) end,
+        {description = "rofi theme selector", group = "super"}),
 
     -- ctrl + shift + ...
     awful.key({ modkey1, "Shift"  }, "Escape", function() awful.util.spawn("xfce4-taskmanager") end),
@@ -480,13 +479,13 @@ globalkeys = my_table.join(
              -- {description = "view  previous nonempty", group = "tag"}),
 
     -- Default client focus
-    awful.key({ altkey,           }, "j",
+    awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ altkey,           }, "k",
+    awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -494,30 +493,30 @@ globalkeys = my_table.join(
     ),
 
     -- By direction client focus - letters
-    awful.key({ modkey }, "j",
-        function()
-            awful.client.focus.global_bydirection("down")
-            if client.focus then client.focus:raise() end
-        end,
-        {description = "focus down", group = "client"}),
-    awful.key({ modkey }, "k",
-        function()
-            awful.client.focus.global_bydirection("up")
-            if client.focus then client.focus:raise() end
-        end,
-        {description = "focus up", group = "client"}),
-    awful.key({ modkey }, "h",
-        function()
-            awful.client.focus.global_bydirection("left")
-            if client.focus then client.focus:raise() end
-        end,
-        {description = "focus left", group = "client"}),
-    awful.key({ modkey }, "l",
-        function()
-            awful.client.focus.global_bydirection("right")
-            if client.focus then client.focus:raise() end
-        end,
-        {description = "focus right", group = "client"}),
+    --awful.key({ altkey }, "j",
+    --    function()
+    --        awful.client.focus.global_bydirection("down")
+    --        if client.focus then client.focus:raise() end
+    --    end,
+    --    {description = "focus down", group = "client"}),
+    --awful.key({ altkey }, "k",
+    --    function()
+    --        awful.client.focus.global_bydirection("up")
+    --        if client.focus then client.focus:raise() end
+    --    end,
+    --    {description = "focus up", group = "client"}),
+    --awful.key({ altkey }, "h",
+    --    function()
+    --        awful.client.focus.global_bydirection("left")
+    --        if client.focus then client.focus:raise() end
+    --    end,
+    --    {description = "focus left", group = "client"}),
+    --awful.key({ altkey }, "l",
+    --    function()
+    --        awful.client.focus.global_bydirection("right")
+    --        if client.focus then client.focus:raise() end
+    --    end,
+    --    {description = "focus right", group = "client"}),
 
 
         -- By direction client focus with arrows
@@ -611,9 +610,9 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift"   }, "x", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -625,8 +624,8 @@ globalkeys = my_table.join(
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    --awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-             -- {description = "select previous", group = "layout"}),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+              {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
